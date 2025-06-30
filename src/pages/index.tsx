@@ -1,5 +1,13 @@
 // This will be home page (/)
 
+import { useRouter } from 'next/router'
+import { Button } from "@/components/ui/button"
+
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+
+  const router = useRouter()
+
+  return <Button variant="secondary" onClick={() => router.push('/accordion')}>
+      Dashboard
+    </Button>
 }

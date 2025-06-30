@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-export function AccordionDemo() {
+export default function AccordionDemo() {
   return (
     <Accordion
       type="single"
