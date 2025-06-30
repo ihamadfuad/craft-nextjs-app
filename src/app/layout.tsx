@@ -17,13 +17,19 @@ export const metadata: Metadata = {
   description: "Customer Segmentation Querying",
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: 'en-US' }, { lang: 'ar' }]
+}
+
+export default async function RootLayout({
   children,
+  params
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
+  params: Promise<{ lang: 'en-US' | 'ar' }>
 }>) {
   return (
-    <html lang="en">
+    <html lang={(await params).lang}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
