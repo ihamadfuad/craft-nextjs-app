@@ -1,4 +1,8 @@
 {
+  "titles": {
+    "overview": "Overview",
+    "segmentation": "Segmentations"
+  },
   "products": {
     "cart": "اضافة الى السلة"
   }

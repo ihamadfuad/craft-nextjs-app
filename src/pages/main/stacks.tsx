@@ -80,31 +80,31 @@ export function ZStack({
     )}
     {...props}
   />
-  }
+}
 
-  type ContentProps = React.HTMLAttributes<HTMLDivElement> & {
-    width?: boolean
-    height?: boolean
-    padding?: string
-    marginTop?: string
+type ContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  width?: boolean
+  height?: boolean
+  padding?: string
+  marginTop?: string
   marginBottom?: string
   marginLeading?: string
   marginTrailing?: string
-  }
+}
 
-  export function StackContent({
-    width, height, padding,
-    marginTop, marginBottom, marginLeading, marginTrailing, 
-    ...props
-  }: ContentProps) {
-    return <div className={cn(
-      width ? "w-screen" : (height ? "h-screen" : "w-screen"),
-      padding ? `p-${padding}` : "p-0",
-      marginTop ? `mt-${marginTop}` : "",
-      marginBottom ? `mb-${marginBottom}` : "",
-      marginLeading ? `ml-${marginLeading}` : "",
-      marginTrailing ? `mr-${marginTrailing}` : ""
-    )}
+export function StackContent({
+  width, height, padding,
+  marginTop, marginBottom, marginLeading, marginTrailing,
+  ...props
+}: ContentProps) {
+  return <div className={cn(
+    width ? "w-screen" : (height ? "h-screen" : "w-screen"),
+    padding ? `p-${padding}` : "p-0",
+    marginTop ? `mt-${marginTop}` : "",
+    marginBottom ? `mb-${marginBottom}` : "",
+    marginLeading ? `ml-${marginLeading}` : "",
+    marginTrailing ? `mr-${marginTrailing}` : ""
+  )}
     {...props}
-    />
-  }
+  />
+}
