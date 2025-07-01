@@ -105,7 +105,7 @@ export default function Page({
               // onClick={() => { setSelection(1) }}
               className="text-left"
             >
-              <Card className="m-8 p-8">
+              <Card className="m-0 p-16">
                 <Image src="/plus.circle.dashed.svg" alt="Add new audience" width={64} height={64} />
                 <h3 className="scroll-m-20 text-3xl font-regular tracking-tight text-slate-400">
                   Define
