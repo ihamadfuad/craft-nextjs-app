@@ -8,18 +8,14 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { localizationSets } from '@/app/localization'
 import { useEffect, useState } from 'react'
-import AccordionDemo from './accordion'
-import { NavigationStack } from './main/navigation-stack'
-import { VSpacer, HSpacer, VStack, HStack, ZStack, StackContent } from './main/stacks'
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaDefault } from './design-system/charts'
 import { Card } from '@/components/ui/card'
-
-// div direction (dir="ltr") (dir="rtl") (ms: margin start) (me: margin end) (ps: padding start) (pe: padding end)
-// child outer margin: mt-8 ml-8 mr-8 mb-8 (vertical margin: my-8) (horizontal margin: mx-8) 
-// child inner padding: pt-8 pl-8 pr-8 pb-8 (vertical padding: py-8) (horizontal padding: px-8) 
-// children spacing: space-x-8 space-y-8
-// w-full w-8 w-1/2 (viewport: w-screen)
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog'
+import { DialogFooter, DialogHeader } from '@/components/ui/dialog'
+import { Label } from 'recharts'
+import { Input } from '@/components/ui/input'
+import LoginPage from '@/pages/login/login-view'
 
 export default function Page({
   params,
@@ -29,6 +25,8 @@ export default function Page({
   const router = useRouter()
   const [lang, setLang] = useState<'en' | 'ar'>('en'); // default fallback
   const [localized, setLocalized] = useState<any>(null);
+
+  const [selection, setSelection] = useState<0 | 1>(0); // default fallback
 
   useEffect(() => {
     const fetchLang = async () => {
@@ -54,163 +52,99 @@ export default function Page({
 
   return (
 
-    <div className='flex flex-col m-12'>
-      <div className='flex items-stretch mb=8'>
+    <Dialog>
+      <div className='flex flex-col m-12'>
+        <div className='flex items-stretch mb=8'>
 
-        <Button
-          variant="ghost"
-          onClick={() => {
-          }}>
-          <h4 className="scroll-m-20 text-4xl font-semibold tracking-tight">
-            {localized.titles.overview}
-          </h4>
-        </Button>
+          <Button
+            variant="ghost"
+            onClick={() => setSelection(0)}>
+            <h4 className={selection == 0 ? "scroll-m-20 text-4xl font-semibold tracking-tight text-black" : "scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50"}>
+              {localized.titles.overview}
+            </h4>
+          </Button>
 
-        <Button
-          variant="ghost"
-          onClick={() => {
-          }}>
-          <h4 className="scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50">
-            {localized.titles.segmentation}
-          </h4>
-        </Button>
+          <Button
+            variant="ghost"
+            onClick={() => setSelection(1)}>
+            <h4 className={selection == 1 ? "scroll-m-20 text-4xl font-semibold tracking-tight text-black" : "scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50"}>
+              {localized.titles.segmentation}
+            </h4>
+          </Button>
+
+          <Button
+            variant="secondary"
+            className='ml-auto'
+            onClick={() => {
+              const newLang = lang === 'en' ? 'ar' : 'en';
+              setLang(newLang);
+              // Simulate Accept-Language by storing in localStorage or triggering fetch
+              localStorage.setItem('Accept-Language', newLang);
+            }}>
+            {lang === 'en' ? 'العربية' : 'English'}
+          </Button>
+        </div>
+
+        <Separator className='mt-4' />
+
+        <div className={`${selection == 0 ? 'hidden' : ''}`}>
+          <LoginPage />
+        </div>
+
+        <div className={`grid grid-cols-4 ${selection !== 0 ? 'hidden' : ''}`}>
+
+          {[0, 1, 2, 3, 4].map((index) => (
+            <div className='m-8'>
+              <ChartAreaDefault />
+            </div>
+          ))}
+
+          <DialogTrigger>
+            <button
+              type="button"
+              // onClick={() => { setSelection(1) }}
+              className="text-left"
+            >
+              <Card className="m-8 p-8">
+                <Image src="/plus.circle.dashed.svg" alt="Add new audience" width={64} height={64} />
+                <h3 className="scroll-m-20 text-3xl font-regular tracking-tight text-slate-400">
+                  Define
+                </h3>
+                <h4 className="scroll-m-20 text-3xl font-regular tracking-tight text-slate-400">
+                  New Audience
+                </h4>
+              </Card>
+            </button>
+          </DialogTrigger>
+
+          <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4">
+            <div className="grid gap-3">
+              <Label>Name</Label>
+              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
+            </div>
+            <div className="grid gap-3">
+              <Label>Username</Label>
+              <Input id="username-1" name="username" defaultValue="@peduarte" />
+            </div>
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+
+        </div>
       </div>
-
-      <Separator className='mt-4' />
-
-      <div className='grid grid-cols-4'>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <div className='m-8'>
-          <ChartAreaDefault />
-        </div>
-
-        <Card className="m-8 p-8">
-
-          <Image src="/plus.circle.dashed.svg" alt="Add new audience" width={64} height={64} />
-
-          <h3 className="scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50">
-            Define
-          </h3>
-          <h4 className="scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50">
-            New Audience
-          </h4>
-        </Card>
-      </div>
-
-      <div className='flex my-12 items-stretch bg-gray-100'>
-
-        <Button
-          variant="secondary"
-          onClick={() => {
-            const newLang = lang === 'en' ? 'ar' : 'en';
-            setLang(newLang);
-            // Simulate Accept-Language by storing in localStorage or triggering fetch
-            localStorage.setItem('Accept-Language', newLang);
-          }}>
-          {localized.products.cart}
-        </Button>
-
-        <Button
-          variant="secondary"
-          className='w-20 ml-auto'>
-          {localized.products.cart}
-        </Button>
-
-        <Button
-          variant="secondary"
-          className='w-20 ml-auto'>
-          {localized.products.cart}
-        </Button>
-
-      </div>
-    </div>
-
-    // <VStack className="bg-gray-200">
-
-    //   <HStack alignment='center'>
-    //     <HSpacer />
-    //     <NavigationStack />
-    //     <HSpacer />
-
-
-    //     <div className='mt-8 ml-8 mr-8 mb-8'>
-    //     </div>
-
-    //     {/* <StackContent className=''>
-    //       <Button
-    //         variant="secondary"
-    //         onClick={() => {
-    //           const newLang = lang === 'en' ? 'ar' : 'en';
-    //           setLang(newLang);
-    //           // Simulate Accept-Language by storing in localStorage or triggering fetch
-    //           localStorage.setItem('Accept-Language', newLang);
-    //         }}
-    //       >
-    //         {localized.products.cart}
-    //       </Button>
-    //     </StackContent> */}
-    //   </HStack>
-
-    //   <VSpacer />
-
-    //   <HStack spacingX='16' marginTop='10' alignment='center'>
-
-    //     <StackContent padding='2'>
-    //       <Button variant="secondary" onClick={() => router.push('/accordion')}>
-    //         {localized.products.cart}
-    //       </Button>
-    //     </StackContent>
-
-    //     <StackContent padding='2'>
-    //       <Button variant="secondary" onClick={() => router.push('/accordion')}>
-    //         {localized.products.cart}
-    //       </Button>
-    //     </StackContent>
-
-    //     <StackContent padding='2'>
-    //       <Button variant="secondary" onClick={() => router.push('/accordion')}>
-    //         {localized.products.cart}
-    //       </Button>
-    //     </StackContent>
-
-    //   </HStack>
-
-    //   <VSpacer />
-
-    //   <HStack alignment='left' >
-    //     <HSpacer />
-    //     <AccordionDemo />
-    //     <HSpacer />
-    //   </HStack>
-
-    // </VStack>
+    </Dialog>
   )
 }
