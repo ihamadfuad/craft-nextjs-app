@@ -30,7 +30,7 @@ export default function DefineNewAudience() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                    <DialogTitle>Share link</DialogTitle>
+                    <DialogTitle>Share link 2</DialogTitle>
                     <DialogDescription>
                         Anyone who has this link will be able to view this.
                     </DialogDescription>

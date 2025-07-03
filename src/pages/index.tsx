@@ -100,10 +100,17 @@ function NavigationBarView({
   )
 }
 
+// grid - cols - 1(default, mobile)
+// sm: grid - cols - 2(≥640px)
+// md: grid - cols - 3(≥768px)
+// lg: grid - cols - 4(≥1024px)
+// xl: grid - cols - 5(≥1280px)
+// 2xl: grid - cols - 6(≥1536px)
+
 function MainTabView({ selection }: { selection: 0 | 1 }) {
   if (selection === 0) {
     return (
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {[0, 1, 2, 3, 4].map(index => (
           <div className='m-8' key={index}>
             <ChartAreaDefault />
