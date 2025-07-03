@@ -9,7 +9,7 @@ import { useLocalization } from "@/context/LocalizationContext";
 import { Fragment, useEffect, useState } from 'react'
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaDefault } from './design-system/charts'
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog'
+import { Dialog } from '@radix-ui/react-dialog'
 import LoginPage from '@/pages/login/login-view'
 import DialogCloseButton from '@/components/dialog-context-menu'
 import DefineNewAudience from '@/components/define-new-audience'
