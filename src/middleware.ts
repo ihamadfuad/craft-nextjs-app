@@ -1,15 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "@/context/SessionContext";
+import { decrypt } from "@/lib/session";
 import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/console"];
-const publicRoutes = ["/login", "/signup", "/"];
+const protectedRoutes = ["/"];
+const publicRoutes = ["/login", "/signup"];
 const PUBLIC_FILE = /\.(.*)$/;
 
 export default async function middleware(req: NextRequest) {
+  console.log("🔍 Middleware is running...");
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
+  console.log('Path is:')
+  console.log(path);
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
@@ -35,6 +38,10 @@ export default async function middleware(req: NextRequest) {
 }
 
 // Routes Middleware should not run on
+// export const config = {
+//   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+// };
+
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: ["/:path*"],
 };
