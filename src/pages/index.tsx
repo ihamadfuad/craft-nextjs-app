@@ -84,7 +84,7 @@ function NavigationBarView({
 
         <Button
           variant="secondary"
-          className='ml-auto'
+          className='ms-auto'
           onClick={() => {
             const newLang = lang === 'en' ? 'ar' : 'en';
             setLang(newLang);
