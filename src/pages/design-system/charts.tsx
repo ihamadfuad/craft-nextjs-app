@@ -92,6 +92,7 @@ export function ChartAreaDefault() {
               fill="url(#fillDesktop)"
               fillOpacity={0.4}
               stroke="var(--color-desktop)"
+              isAnimationActive={false} // Disable animation
             />
           </AreaChart>
         </ChartContainer>
