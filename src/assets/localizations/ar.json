@@ -1,9 +1,14 @@
 {
   "titles": {
-    "overview": "Overview",
-    "segmentation": "Segmentations"
+    "overview": "النظرة عامة",
+    "segmentation": "المجموعات"
   },
   "products": {
     "cart": "اضافة الى السلة"
+  },
+  "charts": {
+    "title": "مستخدمون مجهولون",
+    "subtitle": "إظهار إجمالي المستخدمين غير المسجلين مجهولين على مدار الثلاثين يومًا الماضية",
+    "footnote": "ارتفاع بنسبة 5.2٪ هذا الشهر"
   }
 }

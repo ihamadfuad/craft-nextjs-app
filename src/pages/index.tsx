@@ -5,7 +5,7 @@
 import '@/app/globals.css'
 import { useRouter } from 'next/router'
 import { Button } from "@/components/ui/button"
-import { localizationSets } from '@/app/localization'
+import { useLocalization } from "@/context/LocalizationContext";
 import { Fragment, useEffect, useState } from 'react'
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaDefault } from './design-system/charts'
@@ -19,38 +19,12 @@ const tabs = [
   { key: 1, label: (loc: any) => loc.titles.segmentation },
 ];
 
-export default function Page({
-  params,
-}: {
-  params: { lang: 'en' | 'ar' } | undefined
-}) {
+export default function Page() {
   const router = useRouter()
-  const [lang, setLang] = useState<'en' | 'ar'>('en'); // default fallback
-  const [localized, setLocalized] = useState<any>(null);
-
-  const [selection, setSelection] = useState<0 | 1>(0); // default fallback
-
-  useEffect(() => {
-    const fetchLang = async () => {
-      const resolvedParams = await params;
-      setLang(resolvedParams?.lang || 'en'); // default fallback
-    };
-
-    fetchLang();
-  }, [params]);
-
-  useEffect(() => {
-    const fetchLocalization = async () => {
-      const localization = await localizationSets[lang]();
-      setLocalized(localization);
-    };
-
-    if (lang) {
-      fetchLocalization();
-    }
-  }, [lang]);
-
+  const { lang, setLang, localized } = useLocalization();
   if (!localized) return null;
+
+  const [selection, setSelection] = useState<0 | 1>(0);
 
   return (
 

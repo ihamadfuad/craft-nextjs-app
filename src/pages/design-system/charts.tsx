@@ -17,6 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { useLocalization } from "@/context/LocalizationContext"
 
 export const description = "A simple area chart"
 
@@ -37,12 +38,16 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function ChartAreaDefault() {
+
+  const { lang, setLang, localized } = useLocalization();
+  if (!localized) return null;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Anonymous Users</CardTitle>
+        <CardTitle>{localized.charts.title}</CardTitle>
         <CardDescription>
-          Showing total anonymous unregisterd users for the last 1 month
+          {localized.charts.subtitle}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -81,7 +86,7 @@ export function ChartAreaDefault() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 leading-none font-medium">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              {localized.charts.footnote} <TrendingUp className="h-4 w-4" />
             </div>
             <div className="text-muted-foreground flex items-center gap-2 leading-none">
               January - June 2024
