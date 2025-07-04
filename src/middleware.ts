@@ -1,18 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "@/lib/session";
+import { decrypt } from "@/pages/authentication/session";
 import { cookies } from "next/headers";
 
 // 1. Specify protected and public routes
 const protectedRoutes = ["/"];
-const publicRoutes = ["/login", "/signup"];
+const publicRoutes = ["/login", "/signup", "/console"];
 const PUBLIC_FILE = /\.(.*)$/;
 
 export default async function middleware(req: NextRequest) {
   console.log("🔍 Middleware is running...");
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
-  console.log('Path is:')
-  console.log(path);
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
