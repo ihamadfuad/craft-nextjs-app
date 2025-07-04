@@ -10,7 +10,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Separator } from "@/components/ui/separator"
 import { ChartAreaDefault } from './design-system/charts'
 import { Dialog } from '@radix-ui/react-dialog'
-import LoginPage from '@/pages/login/login-view'
+import LoginPage from '@/pages/authentication/login'
 import DialogCloseButton from '@/components/dialog-context-menu'
 import DefineNewAudience from '@/components/define-new-audience'
 

@@ -17,7 +17,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
 
-  const [state, action, pending] = useActionState(signup, undefined)
+  const [state, action, pending] = useActionState(signin, undefined)
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -25,7 +25,7 @@ export function LoginForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Login</CardTitle>
           <CardDescription>
-            to start segmenting your customers
+            Start using the app by logining first
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -36,12 +36,16 @@ export function LoginForm({
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
+                    name="email"
                     type="email"
                     placeholder="m@example.com"
                     required
                   />
                 </div>
-                {state?.errors?.email && <p>{state.errors.email}</p>}
+
+                <CardDescription>
+                  {state?.errors?.email && <p>{state.errors.email}</p>}
+                </CardDescription>
 
                 <div className="grid gap-3">
                   <div className="flex items-center">
@@ -53,18 +57,21 @@ export function LoginForm({
                       Forgot your password?
                     </a>
                   </div>
-                  <Input id="password" type="password" required />
+                  <Input id="password" name="password" type="password" required />
                 </div>
-                {state?.errors?.password && (
-                  <div>
-                    <p>Password must:</p>
-                    <ul>
-                      {state.errors.password.map((error) => (
-                        <li key={error}>- {error}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+
+                <CardDescription>
+                  {state?.errors?.password && (
+                    <div>
+                      <p>Password must:</p>
+                      <ul>
+                        {state.errors.password.map((error) => (
+                          <li key={error}>- {error}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </CardDescription>
 
                 <Button disabled={pending} type="submit" className="w-full">
                   Login
