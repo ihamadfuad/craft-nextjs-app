@@ -9,15 +9,39 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signin, signup } from "@/app/actions/auth"
-import { useActionState } from "react"
+import { useState, useTransition } from "react"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
+  const [pending, startTransition] = useTransition()
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
 
-  const [state, action, pending] = useActionState(signin, undefined)
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const email = formData.get("email")
+    const password = formData.get("password")
+
+    // optional: client-side validation
+    if (!email || !password) {
+      setErrors({ email: !email ? "Required" : undefined, password: !password ? "Required" : undefined })
+      return
+    }
+
+    startTransition(async () => {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" }
+      })
+
+      if (res.ok) {
+        window.location.href = "/console" // ✅ redirect after success
+      } else {
+        const { error } = await res.json()
+        setErrors({ email: " ", password: error || "Invalid credentials" })
+      }
+    })
+  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -25,11 +49,11 @@ export function LoginForm({
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Login</CardTitle>
           <CardDescription>
-            Start using the app by logining first
+            Start using the app by logging in first
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={action}>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-6">
               <div className="grid gap-6">
                 <div className="grid gap-3">
@@ -42,9 +66,8 @@ export function LoginForm({
                     required
                   />
                 </div>
-
                 <CardDescription>
-                  {state?.errors?.email && <p>{state.errors.email}</p>}
+                  {errors?.email && <p>{errors.email}</p>}
                 </CardDescription>
 
                 <div className="grid gap-3">
@@ -61,14 +84,14 @@ export function LoginForm({
                 </div>
 
                 <CardDescription>
-                  {state?.errors?.password && (
+                  {errors?.password && (
                     <div>
                       <p>Password must:</p>
                       <ul>
-                        {state.errors.password.map((error) => (
-                          <li key={error}>- {error}</li>
-                        ))}
+                        <li>- Be correct 😄</li>
+                        <li>- Not empty</li>
                       </ul>
+                      <p className="text-red-500 mt-1">{errors.password}</p>
                     </div>
                   )}
                 </CardDescription>

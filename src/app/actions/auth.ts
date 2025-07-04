@@ -1,8 +1,6 @@
-import { SignupFormSchema, FormState } from "@/lib/form-validation";
+import { SignupFormSchema, FormState, SigninFormSchema } from "@/lib/form-validation";
 import { redirect, RedirectType } from "next/navigation";
-import { useSession } from "@/context/SessionContext";
-
-import { createSession, deleteSession } from "@/lib/session";
+//import { createSession, deleteSession } from "@/lib/session";
 
 export async function signup(state: FormState, formData: FormData) {
   // Validate form fields
@@ -23,14 +21,19 @@ export async function signup(state: FormState, formData: FormData) {
   const { name, email, password } = validatedFields.data;
   // e.g. Hash the user's password before storing it
 
-  await createSession(null, email);
+  await fetch("/api/login", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+    headers: { "Content-Type": "application/json" }
+  });
+
   // 5. Redirect user
   redirect("/console", RedirectType.replace);
 }
 
 export async function signin(state: FormState, formData: FormData) {
   // Validate form fields
-  const validatedFields = SignupFormSchema.safeParse({
+  const validatedFields = SigninFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
   });
@@ -47,12 +50,18 @@ export async function signin(state: FormState, formData: FormData) {
 
   // e.g. Hash the user's password before storing it
 
-  await createSession(null, email);
+  await fetch("/api/login", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+    headers: { "Content-Type": "application/json" }
+  });
+
   // 5. Redirect user
-  redirect("/console", RedirectType.replace);
+  // ✅ Return redirect as a response
+  return redirect("/console");
 }
 
 export async function logout() {
-  await deleteSession(null);
+  //await deleteSession(null);
   redirect("/authentication/login");
 }
