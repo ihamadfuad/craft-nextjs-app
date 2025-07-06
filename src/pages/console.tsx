@@ -13,6 +13,7 @@ import { Dialog } from '@radix-ui/react-dialog'
 import LoginPage from '@/pages/authentication/login'
 import DialogCloseButton from '@/components/dialog-context-menu'
 import DefineNewAudience from '@/components/define-new-audience'
+import { ThemeMode } from '@/components/theme-mode';
 
 const tabs = [
   { key: 0, label: (loc: any) => loc.titles.overview },
@@ -82,9 +83,12 @@ function NavigationBarView({
 
         <DialogCloseButton />
 
+        <div className='ms-auto me-2'>
+          <ThemeMode />
+        </div>
+
         <Button
           variant="secondary"
-          className='ms-auto'
           onClick={() => {
             const newLang = lang === 'en' ? 'ar' : 'en';
             setLang(newLang);
