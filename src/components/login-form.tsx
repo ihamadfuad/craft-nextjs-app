@@ -38,15 +38,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       // })
 
       setItem("token", email)
-
       addCookie("token", email as string)
-      addCookie("password", password as string)
-
-      // Add delay then remove cookies
-      setTimeout(() => {
-        removeCookie("token")
-        removeCookie("password")
-      }, 2000) // 2 seconds delay
       
       if (getItem("token")) {
         window.location.href = "/console" // ✅ redirect after success
