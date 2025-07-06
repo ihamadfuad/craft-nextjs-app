@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Console App",
-  description: "Customer Segmentation Querying",
+  title: "App",
+  description: "A NextJS app template.",
 };
 
 export async function generateStaticParams() {
@@ -30,9 +30,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang={(await params).lang}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
       </body>
     </html>
