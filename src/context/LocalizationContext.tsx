@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { localizationSets } from "@/app/localization";
+import { localizationSets } from "@/lib/localization";
 
 type Lang = 'en' | 'ar';
 
