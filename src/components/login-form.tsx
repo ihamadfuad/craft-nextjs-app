@@ -10,10 +10,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
+import { useSession } from "@/context/SessionStorageContext"
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [pending, startTransition] = useTransition()
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
+  const { setItem, getItem } = useSession()
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -28,17 +30,18 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
     }
 
     startTransition(async () => {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: { "Content-Type": "application/json" }
-      })
+      // const res = await fetch("/api/login", {
+      //   method: "POST",
+      //   body: JSON.stringify({ email, password }),
+      //   headers: { "Content-Type": "application/json" }
+      // })
 
-      if (res.ok) {
+      setItem("token", email)
+
+      if (getItem("token")) {
         window.location.href = "/console" // ✅ redirect after success
       } else {
-        const { error } = await res.json()
-        setErrors({ email: " ", password: error || "Invalid credentials" })
+        setErrors({ email: " ", password: "Invalid credentials" })
       }
     })
   }
