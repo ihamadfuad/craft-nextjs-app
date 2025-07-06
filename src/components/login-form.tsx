@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
 import { useSession } from "@/context/SessionStorageContext"
+import { addCookie, removeCookie } from "@/lib/cookies-manager"
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [pending, startTransition] = useTransition()
@@ -38,6 +39,15 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 
       setItem("token", email)
 
+      addCookie("token", email as string)
+      addCookie("password", password as string)
+
+      // Add delay then remove cookies
+      setTimeout(() => {
+        removeCookie("token")
+        removeCookie("password")
+      }, 2000) // 2 seconds delay
+      
       if (getItem("token")) {
         window.location.href = "/console" // ✅ redirect after success
       } else {
