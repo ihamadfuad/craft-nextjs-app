@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useState, useTransition } from "react"
 import { useSession } from "@/context/SessionStorageContext"
-import { addCookie, removeCookie } from "@/lib/cookies-manager"
+import { addCookie } from "@/lib/cookies-manager"
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [pending, startTransition] = useTransition()
@@ -19,12 +19,13 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   const { setItem, getItem } = useSession()
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    
     event.preventDefault()
+    
     const formData = new FormData(event.currentTarget)
     const email = formData.get("email")
     const password = formData.get("password")
 
-    // optional: client-side validation
     if (!email || !password) {
       setErrors({ email: !email ? "Required" : undefined, password: !password ? "Required" : undefined })
       return
@@ -92,10 +93,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
                   {errors?.password && (
                     <div>
                       <p>Password must:</p>
-                      <ul>
-                        <li>- Be correct 😄</li>
-                        <li>- Not empty</li>
-                      </ul>
                       <p className="text-red-500 mt-1">{errors.password}</p>
                     </div>
                   )}
