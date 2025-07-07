@@ -72,7 +72,7 @@ function NavigationBarView({
             <h4
               className={
                 selection === tab.key
-                  ? "scroll-m-20 text-4xl font-semibold tracking-tight text-black"
+                  ? "scroll-m-20 text-4xl font-semibold tracking-tight text--color-foreground"
                   : "scroll-m-20 text-3xl font-regular tracking-tight text-foreground-gray-50"
               }
             >
