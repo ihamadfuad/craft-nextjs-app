@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { useLocalization } from "@/context/LocalizationContext";
 import { Fragment, useEffect, useState } from 'react'
 import { Separator } from "@/components/ui/separator"
-import { ChartAreaDefault } from './design-system/charts'
+import { ChartArea } from './design-system/charts'
 import { Dialog } from '@radix-ui/react-dialog'
 import LoginPage from '@/pages/authentication/login'
 import DialogCloseButton from '@/components/dialog-context-menu'
@@ -112,12 +112,37 @@ function NavigationBarView({
 // 2xl: grid - cols - 6(≥1536px)
 
 function MainTabView({ selection }: { selection: 0 | 1 }) {
+
   if (selection === 0) {
+
+    const { localized } = useLocalization();
+    if (!localized) return null;
+
+    const data = [
+      { month: "January", desktop: 18 },
+      { month: "February", desktop: 35 },
+      { month: "March", desktop: 23 },
+      { month: "April", desktop: 33 },
+      { month: "May", desktop: 29 },
+      { month: "June", desktop: 24 },
+    ]
+
     return (
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {[0, 1, 2, 3, 4].map(index => (
           <div className='m-8' key={index}>
-            <ChartAreaDefault />
+            <ChartArea
+              config={{
+                desktop: {
+                  label: "Desktop",
+                  color: "var(--chart-3)",
+                },
+              }}
+              data={data}
+              title={localized.charts.title}
+              subtitle={localized.charts.subtitle}
+              footnote={localized.charts.footnote}
+              description="January - June 2024" />
           </div>
         ))}
         <div className='m-8'>
@@ -126,5 +151,6 @@ function MainTabView({ selection }: { selection: 0 | 1 }) {
       </div>
     );
   }
+
   return <LoginPage />;
 }
