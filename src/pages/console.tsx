@@ -15,11 +15,18 @@ import DialogCloseButton from '@/components/dialog-context-menu'
 import DefineNewAudience from '@/components/define-new-audience'
 import { ThemeMode } from '@/components/theme-mode';
 import { parseAsInteger, useQueryState } from "nuqs";
+import { Metadata } from 'next';
 
 const tabs = [
   { key: 0, label: (loc: any) => loc.titles.primary },
   { key: 1, label: (loc: any) => loc.titles.secondary },
 ];
+
+export const metadata: Metadata = {
+  title: 'Console',
+  description: 'A console dashboard for demo.',
+  keywords: ["react", "client components"]
+};
 
 export default function Console() {
   const router = useRouter()
