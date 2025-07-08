@@ -1,10 +1,7 @@
 {
   "titles": {
-    "overview": "النظرة عامة",
-    "segmentation": "المجموعات"
-  },
-  "products": {
-    "cart": "اضافة الى السلة"
+    "primary": "أساسي",
+    "secondary": "ثانوي"
   },
   "charts": {
     "title": "مستخدمون مجهولون",

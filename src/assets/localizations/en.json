@@ -1,10 +1,7 @@
 {
   "titles": {
-    "overview": "Overview",
-    "segmentation": "Segmentations"
-  },
-  "products": {
-    "cart": "Add to Cart"
+    "primary": "Primary",
+    "secondary": "Secondary"
   },
   "charts": {
     "title": "Anonymous Users",

@@ -16,8 +16,8 @@ import DefineNewAudience from '@/components/define-new-audience'
 import { ThemeMode } from '@/components/theme-mode';
 
 const tabs = [
-  { key: 0, label: (loc: any) => loc.titles.overview },
-  { key: 1, label: (loc: any) => loc.titles.segmentation },
+  { key: 0, label: (loc: any) => loc.titles.primary },
+  { key: 1, label: (loc: any) => loc.titles.secondary },
 ];
 
 export default function Console() {
