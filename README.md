@@ -31,6 +31,12 @@ You can start editing the homepage by modifying `app/page.tsx`. The page updates
 - `assets/localizations` — your main application localizations
 - `components/` — shared UI components
     - `components/ui` — shared UI shadcn components
+    
+      ShadCN UI is integrated using [shadcn/ui](https://ui.shadcn.dev), providing a set of customizable, accessible, and themeable components.
+
+      You can:
+      - Build UI fast using ready-made building blocks
+      - Customize components with Tailwind and variants
     - `components/` — developer UI components
 - `context/` — global state shared via React Context
 - `features/` — your data modals and custom hooks
