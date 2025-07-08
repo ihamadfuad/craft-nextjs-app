@@ -14,6 +14,7 @@ import LoginPage from '@/pages/authentication/login'
 import DialogCloseButton from '@/components/dialog-context-menu'
 import DefineNewAudience from '@/components/define-new-audience'
 import { ThemeMode } from '@/components/theme-mode';
+import { parseAsInteger, useQueryState } from "nuqs";
 
 const tabs = [
   { key: 0, label: (loc: any) => loc.titles.primary },
@@ -26,9 +27,25 @@ export default function Console() {
   if (!localized) return null;
 
   const [selection, setSelection] = useState<0 | 1>(0);
+  const [hello, setHello] = useQueryState("hello", { defaultValue: "" });
+  const [count, setCount] = useQueryState(
+    "count",
+    parseAsInteger.withDefault(0),
+  );
 
   return (
 
+    // Example of state manager for query
+    // <>
+    //   <button onClick={() => setCount((c) => c + 1)}>Count: {count}</button>
+    //   <input
+    //     value={hello}
+    //     placeholder="Enter your name"
+    //     onChange={(e) => setHello(e.target.value || null)}
+    //   />
+    //   <p>Hello, {hello || "anonymous visitor"}!</p>
+    // </>
+    
     <Dialog>
       <div
         className="flex flex-col m-12"
