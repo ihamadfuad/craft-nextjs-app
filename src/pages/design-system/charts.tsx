@@ -19,7 +19,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export function ChartArea({ config, data, title, subtitle, footnote, description }: { config: ChartConfig, data: any[] | undefined, title: string; subtitle: string, footnote: string, description: string | null }) {
+export function ChartArea({ config, data, title, subtitle, footnote, description }: { config: ChartConfig, data: any[] | undefined, title: string | null; subtitle: string | null, footnote: string | null, description: string | null }) {
 
   return (
     <Card>
@@ -39,11 +39,11 @@ export function ChartArea({ config, data, title, subtitle, footnote, description
   )
 }
 
-function ChartHeader({ title, subtitle }: { title: string; subtitle: string }) {
+function ChartHeader({ title, subtitle }: { title: string | null; subtitle: string | null }) {
   return (
     <CardHeader>
-      <CardTitle>{title}</CardTitle>
-      <CardDescription>{subtitle}</CardDescription>
+      {title && <CardTitle>{title}</CardTitle>}
+      {subtitle && <CardDescription>{subtitle}</CardDescription>}
     </CardHeader>
   )
 }
@@ -130,14 +130,14 @@ function ChartAreaSeries() {
   )
 }
 
-function ChartFooter({ footnote, description }: { footnote: string, description: string | null }) {
+function ChartFooter({ footnote, description }: { footnote: string | null, description: string | null }) {
   return (
     <CardFooter>
       <div className="flex w-full items-start gap-2 text-sm">
         <div className="grid gap-2">
-          <div className="flex items-center gap-2 leading-none font-medium">
+          {footnote && <div className="flex items-center gap-2 leading-none font-medium">
             {footnote} <TrendingUp className="h-4 w-4" />
-          </div>
+          </div>}
           <div className="text-muted-foreground flex items-center gap-2 leading-none">
             {description}
           </div>
