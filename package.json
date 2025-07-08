@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack & sleep 2 && open -a Safari http://localhost:3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
