@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+## Why This Project Exists
+
+This starter is crafted to help developers confidently build modern web apps using [Next.js](https://nextjs.org). Whether you're just getting started or want a clean, thoughtful foundation — this is for you.
+
+## How to Get Started
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +20,47 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the homepage by modifying `app/page.tsx`. The page updates live as you save your changes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure Overview
+
+- `app/` — your main application routes and layout
+- `lib/` — reusable logic like hooks, utilities, and API helpers
+- `components/` — shared UI components
+- `context/` — global state shared via React Context
+- `public/` — static files (images, icons, etc.)
+- `styles/` — global styles
+
+## What Are Hooks?
+
+Hooks are functions that let you use React features (like state or lifecycle) inside functional components.
+
+Examples:
+- `useState()` — store local component state
+- `useEffect()` — run side effects on mount/update
+- Custom hooks like `useFetch()` and `useDebounce()` keep your code reusable and clean.
+
+## What is Context?
+
+Context is a way to share state across the entire app without passing props manually. Use it for things like:
+
+- Authentication (user session)
+- Theme switching (light/dark)
+- Feature flags
+
+You can create and access context via:
+
+```tsx
+const MyContext = createContext();
+const value = useContext(MyContext);
+```
+
+Or wrap it in a custom `useAuth()` hook for better DX.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js Documentation](https://nextjs.org/docs) — explore advanced features.
+- [React Docs](https://react.dev/learn) — learn the modern way to build with React.
+- [Vercel](https://vercel.com) — deploy your app in seconds.
