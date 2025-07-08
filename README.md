@@ -2,6 +2,37 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+## How to Use This Starter
+
+1. **Explore the File Structure**  
+   Get familiar with the folders inside `/app`, `/components`, `/lib`, `/features`, and `/context`. These are structured to promote scalability and separation of concerns.
+
+2. **Use Built-in Hooks**  
+   Use any of the custom hooks under `features/hooks` or `lib/hooks`. For example:
+   ```tsx
+   const isMobile = useIsMobile();
+   ```
+
+3. **Work with Context**  
+   Access global state via the provided contexts. Example:
+   ```tsx
+   const { user, logout } = useAuth();
+   ```
+
+4. **Add Pages**  
+   Add routes inside the `app/` directory. Pages are colocated with their layout and styles.
+
+5. **Add or Customize UI**  
+   Use `components/ui` (ShadCN UI) for ready-made components or add your own under `components/`.
+
+6. **Fetch Data**  
+   Use `useFetch()` or extend `features/models` for API logic.
+
+7. **Add New Features**  
+   Group your new logic in `features/` with `hooks/` and `models/` to keep it modular.
+
+This starter is designed to grow with you — whether you're prototyping quickly or building production-grade apps.
+
 ## Why This Project Exists
 
 This starter is crafted to help developers confidently build modern web apps using [Next.js](https://nextjs.org). Whether you're just getting started or want a clean, thoughtful foundation — this is for you.
