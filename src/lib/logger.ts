@@ -1,4 +1,12 @@
-// lib/logger.ts
+
+// Usage Example: 
+//
+// import logger from '@/lib/logger';
+//
+// export default function HomePage() {
+//   logger.info('Counter fetched successfully');
+//   return <div>Hello World</div>;
+// }
 
 type LogLevel = 'info' | 'warn' | 'error';
 
